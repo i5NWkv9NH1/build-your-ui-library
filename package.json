@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
+  "files": ["dist"],
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
