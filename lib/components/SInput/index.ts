@@ -1,1 +1,1 @@
-export * from './SInput'
+export { SInput } from './SInput'

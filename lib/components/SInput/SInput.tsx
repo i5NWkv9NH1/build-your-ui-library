@@ -1,4 +1,4 @@
-import { defineComponent, ref, watch } from 'vue'
+import { type PropType, defineComponent, ref, watch } from 'vue'
 import './SInput.scss'
 
 export const SInput = defineComponent({
@@ -9,17 +9,21 @@ export const SInput = defineComponent({
       type: String,
       required: true,
     },
+    placeholder: {
+      type: String as PropType<string>,
+      required: false,
+    },
   },
   setup(props, { emit }) {
     const modelValue = ref(props.modelValue)
     watch(() => props.modelValue, () => modelValue.value = props.modelValue)
-    watch(modelValue, () => {
-      emit('update:modelValue', modelValue.value)
-    })
+    watch(modelValue, () => emit('update:modelValue', modelValue.value))
 
     return () => (
       <input
-        v-model={modelValue}
+        class="s-input"
+        v-model={modelValue.value}
+        placeholder={props.placeholder}
       />
     )
   },

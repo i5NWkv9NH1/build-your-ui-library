@@ -1,1 +1,1 @@
-export * from './SLabel'
+export { SLabel } from './SLabel'

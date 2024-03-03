@@ -1,19 +1,30 @@
 {
-  "name": "vue-ui",
+  "name": "@sora/vue-ui",
   "type": "module",
   "version": "0.0.0",
-  "private": true,
-  "files": ["dist"],
+  "private": false,
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "prepublishOnly": "bun run build",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "files": [
+    "dist",
+    "dist/components",
+    "dist/composables"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
+    "build-lib": "tsc --p ./tsconfig.build.json && vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
-  "dependencies": {
+  "peerDependencies": {
     "vue": "^3.4.15"
   },
   "devDependencies": {
@@ -29,13 +40,16 @@
     "@vue/tsconfig": "^0.5.1",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.17.0",
+    "glob": "^10.3.10",
     "jsdom": "^24.0.0",
     "npm-run-all2": "^6.1.1",
     "sass": "^1.71.1",
     "typescript": "~5.3.0",
     "vite": "^5.0.11",
     "vite-plugin-dts": "^3.7.3",
+    "vite-plugin-lib-inject-css": "^2.0.0",
     "vitest": "^1.2.2",
+    "vue": "^3.4.15",
     "vue-tsc": "^1.8.27"
   }
 }

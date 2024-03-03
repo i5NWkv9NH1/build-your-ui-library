@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, renderSlot } from 'vue'
 import './SBtn.scss'
 
 export type ButtonSize = 'x-large' | 'large' | 'default' | 'small' | 'x-small'
@@ -12,18 +12,18 @@ export const SBtn = defineComponent({
       default: 'default',
     },
     text: {
-      type: String,
+      type: String as PropType<string | undefined>,
       required: false,
     },
   },
-  setup(props) {
+  setup(props, { slots }) {
     const useClass = computed(() => [
       `s-btn`,
       `s-btn--${props.size}`,
     ])
     return () => (
       <button class={useClass.value}>
-        {props?.text}
+        {slots.default ? renderSlot(slots, 'default') : props.text || ''}
       </button>
     )
   },
